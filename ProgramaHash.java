@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 
 public class ProgramaHash {
 
+    private java.util.ArrayList<Usuari> usuaris = new java.util.ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -147,6 +148,29 @@ public class ProgramaHash {
             System.out.println("(!) Error durant la gestió de fitxers: " + e.getMessage());
         }
     }
-    public void part3RegistreUsuari() { }
+    
+    public void part3RegistreUsuari() {
+        System.out.println("\n--- PART 3: Registre d'usuari ---");
+        System.out.print("Nom d'usuari: ");
+        String nom = sc.nextLine();
+
+        System.out.print("Contrasenya: ");
+        String pass = sc.nextLine();
+
+        // Generar salt aleatòria
+        String salt = generarSalt();
+
+        // Hash de contrasenya + salt
+        String hashAmbSalt = generarHash(pass + salt);
+
+        // Emmagatzemar usuari a la llista
+        Usuari nouUsuari = new Usuari(nom, salt, hashAmbSalt);
+        usuaris.add(nouUsuari);
+
+        System.out.println("\nUsuari registrat amb èxit!");
+        System.out.println("Salt generat: " + salt);
+        System.out.println("Hash emmagatzemat: " + hashAmbSalt);
+    }
+
     public void part4IniciSessio() { }
 }
