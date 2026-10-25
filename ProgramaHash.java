@@ -75,7 +75,25 @@ public class ProgramaHash {
         return saltHex;
     }
 
-    public void part1CalculResums() { }
+    public void part1CalculResums() {
+        System.out.println("\n--- PART 1: Càlcul de resums ---");
+        System.out.print("Entra un missatge: ");
+        String msg1 = sc.nextLine();
+        String hash1 = generarHash(msg1);
+        System.out.println("Hash SHA-256: " + hash1);
+
+        System.out.print("\nEntra un segon missatge per comparar: ");
+        String msg2 = sc.nextLine();
+        String hash2 = generarHash(msg2);
+        System.out.println("Hash 2 SHA-256: " + hash2);
+
+        if (hash1.equals(hash2)) {
+            System.out.println("RESULTAT: Els dos hashes coincideixen exactament.");
+        } else {
+            System.out.println("RESULTAT: Els hashes són diferents.");
+        }
+    }
+    
     public void part2IntegritatFitxers() { }
     public void part3RegistreUsuari() { }
     public void part4IniciSessio() { }
