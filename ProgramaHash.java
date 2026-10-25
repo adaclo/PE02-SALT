@@ -148,7 +148,7 @@ public class ProgramaHash {
             System.out.println("(!) Error durant la gestió de fitxers: " + e.getMessage());
         }
     }
-    
+
     public void part3RegistreUsuari() {
         System.out.println("\n--- PART 3: Registre d'usuari ---");
         System.out.print("Nom d'usuari: ");
@@ -172,5 +172,37 @@ public class ProgramaHash {
         System.out.println("Hash emmagatzemat: " + hashAmbSalt);
     }
 
-    public void part4IniciSessio() { }
+    public void part4IniciSessio() {
+        System.out.println("\n--- PART 4: Inici de sessió ---");
+        System.out.print("Nom d'usuari: ");
+        String nom = sc.nextLine();
+
+        System.out.print("Contrasenya: ");
+        String pass = sc.nextLine();
+
+        // Cercar usuari registrat
+        Usuari usuariTrobat = null;
+        int i = 0;
+        while (i < usuaris.size() && usuariTrobat == null) {
+            if (usuaris.get(i).getNom().equalsIgnoreCase(nom)) {
+                usuariTrobat = usuaris.get(i);
+            } else {
+                i++;
+            }
+        }
+
+        if (usuariTrobat == null) {
+            System.out.println("(!) Error: L'usuari no existeix.");
+        } else {
+            // Recuperar la salt de l'usuari i recalcular el hash
+            String saltGuardat = usuariTrobat.getSalt();
+            String hashCalculat = generarHash(pass + saltGuardat);
+
+            if (hashCalculat.equals(usuariTrobat.getHashContrasenya())) {
+                System.out.println("\n[+] Accés permès! Benvingut/da, " + nom + ".");
+            } else {
+                System.out.println("\n(!) Error: Contrasenya incorrecta.");
+            }
+        }
+    }
 }
